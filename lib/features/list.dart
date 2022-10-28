@@ -34,7 +34,8 @@ class _HomePageState extends State<ListPage> {
     }
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget._category!=''?widget._category:widget._phase),
+          title:
+              Text(widget._category != '' ? widget._category : widget._phase),
         ),
         body: ListView.separated(
           separatorBuilder: (context, index) => const Divider(),
