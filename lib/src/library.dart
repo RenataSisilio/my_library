@@ -19,6 +19,4 @@ void initData() {
       }
     }
   }
-  books.sort(((a, b) => a.title.compareTo(b.title)));
-  categories.sort(((a, b) => a.compareTo(b)));
 }

@@ -1,16 +1,21 @@
 import 'dart:convert';
 
+import '../src/library.dart';
+
 class Book {
   Book({
+    int? id,
     required this.title,
     this.author = '',
     required List<String> categories,
     phase = const <String>[],
   }) {
+    this.id = id ?? books.length;
     _categories.addAll(categories);
     _phases.addAll(phase);
   }
 
+  late final int id;
   String title;
   String author;
   final _categories = <String>[];
@@ -18,6 +23,7 @@ class Book {
 
   List<String> get categories => _categories;
   List<String> get phases => _phases;
+
   String get catString {
     String string = '';
     for (var element in _categories) {
@@ -29,6 +35,7 @@ class Book {
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
+      'id': id,
       'title': title,
       'author': author,
       'categories': _categories,
@@ -38,6 +45,7 @@ class Book {
 
   factory Book.fromMap(Map<String, dynamic> map) {
     return Book(
+      id: map['id'],
       title: map['title'] as String,
       author: map['author'] as String,
       categories: List<String>.from(map['categories']),

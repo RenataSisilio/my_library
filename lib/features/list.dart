@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leitura_espiritual/features/edit_book.dart';
 
 import '../models/book.dart';
 import '../src/library.dart';
@@ -32,6 +33,7 @@ class _HomePageState extends State<ListPage> {
       display =
           books.where((book) => book.phases.contains(widget._phase)).toList();
     }
+    display.sort(((a, b) => a.title.compareTo(b.title)));
     return Scaffold(
         appBar: AppBar(
           title:
@@ -43,6 +45,18 @@ class _HomePageState extends State<ListPage> {
           itemBuilder: (context, index) => ListTile(
             title: Text(display[index].title),
             subtitle: Text(display[index].author),
+            trailing: IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return EditBookPage(display[index].id);
+                    },
+                  ),
+                );
+              },
+            ),
           ),
         ),
         drawer: const MyDrawer());

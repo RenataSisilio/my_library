@@ -6,16 +6,17 @@ import 'package:flutter/material.dart';
 import '../models/book.dart';
 import '../src/library.dart';
 
-class NewBookPage extends StatefulWidget {
-  NewBookPage({super.key});
+class EditBookPage extends StatefulWidget {
+  EditBookPage(int index, {super.key}) : book = books[index];
 
   final formKey = GlobalKey<FormState>();
+  final Book book;
 
   @override
-  State<NewBookPage> createState() => _NewBookPageState();
+  State<EditBookPage> createState() => _EditBookPageState();
 }
 
-class _NewBookPageState extends State<NewBookPage> {
+class _EditBookPageState extends State<EditBookPage> {
   final titleController = TextEditingController();
   final authorController = TextEditingController();
   final catController = TextEditingController();
@@ -23,6 +24,14 @@ class _NewBookPageState extends State<NewBookPage> {
 
   @override
   Widget build(BuildContext context) {
+    titleController.text = widget.book.title;
+    authorController.text = widget.book.author;
+    catController.text = widget.book.catString.replaceAll(', ', ',');
+    phasesController.text = widget.book.phases
+        .toString()
+        .replaceAll('[', '')
+        .replaceAll(']', '')
+        .replaceAll(', ', ',');
     return Scaffold(
       appBar: AppBar(
         title: const Text('Adicionar livro'),
@@ -75,12 +84,13 @@ class _NewBookPageState extends State<NewBookPage> {
                 onPressed: () async {
                   if (widget.formKey.currentState!.validate()) {
                     final book = Book(
+                      id: widget.book.id,
                       title: titleController.text,
                       author: authorController.text,
                       categories: catController.text.split(','),
                       phase: phasesController.text.split(','),
                     );
-                    books.add(book);
+                    books[book.id] = book;
                     final booksToSave = <String>[];
                     for (var book in books) {
                       booksToSave.add(book.toJson());
@@ -92,7 +102,7 @@ class _NewBookPageState extends State<NewBookPage> {
                 },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
-                  child: Text('ADICIONAR'),
+                  child: Text('SALVAR'),
                 ),
               ),
             ),
