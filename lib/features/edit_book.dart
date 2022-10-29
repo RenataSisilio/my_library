@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../models/book.dart';
 import '../src/library.dart';
+import '../widgets/book_form.dart';
 
 class EditBookPage extends StatefulWidget {
   EditBookPage(int index, {super.key}) : book = books[index];
@@ -42,41 +43,11 @@ class _EditBookPageState extends State<EditBookPage> {
           children: [
             Form(
               key: widget.formKey,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: titleController,
-                      decoration: const InputDecoration(
-                        label: Text('Título'),
-                      ),
-                      validator: (value) =>
-                          value!.isEmpty ? 'Campo obrigatório' : null,
-                    ),
-                    TextFormField(
-                      controller: authorController,
-                      decoration: const InputDecoration(
-                        label: Text('Autor'),
-                      ),
-                    ),
-                    TextFormField(
-                      controller: catController,
-                      decoration: const InputDecoration(
-                        label: Text('Categorias'),
-                      ),
-                      validator: (value) => (value == null || value.isEmpty)
-                          ? 'Campo obrigatório'
-                          : null,
-                    ),
-                    TextFormField(
-                      controller: phasesController,
-                      decoration: const InputDecoration(
-                        label: Text('Fase(s) Formativa(s)'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              child: BookForm(
+                  titleController: titleController,
+                  authorController: authorController,
+                  catController: catController,
+                  phasesController: phasesController),
             ),
             SizedBox(
               width: double.infinity,
