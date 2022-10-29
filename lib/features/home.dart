@@ -21,7 +21,10 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            const Text('Bem-vindo(a)!\n\nBusque seu livro:'),
+            const Text(
+              'Bem-vindo(a)!\n\nBusque seu livro:',
+              textAlign: TextAlign.center,
+            ),
             const SizedBox(height: 24.0),
             Expanded(
               child: ListView.builder(
@@ -75,7 +78,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushReplacementNamed('addBook');
+          Navigator.of(context).pushNamed('addBook');
           setState(() {});
         },
         tooltip: 'Novo',
