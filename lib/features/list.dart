@@ -59,6 +59,6 @@ class _HomePageState extends State<ListPage> {
             ),
           ),
         ),
-        drawer: const MyDrawer());
+        drawer: const Drawer(child: Menu(pop: true)));
   }
 }
