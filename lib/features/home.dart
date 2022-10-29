@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leitura_espiritual/widgets/drawer.dart';
+import 'package:leitura_espiritual/widgets/menu.dart';
 
 import '../src/library.dart';
 import 'list.dart';
