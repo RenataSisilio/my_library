@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:leitura_espiritual/widgets/menu.dart';
 
-import '../src/library.dart';
-import 'list.dart';
-
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
