@@ -22,3 +22,12 @@ void initData() {
     }
   }
 }
+
+void saveData() {
+  final booksToSave = <String>[];
+  for (var book in books) {
+    booksToSave.add(book.toJson());
+  }
+  var encoded = jsonEncode(booksToSave);
+  File('lib/src/library.json').writeAsString(encoded);
+}

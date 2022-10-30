@@ -66,12 +66,7 @@ class _HomePageState extends State<ListPage> {
                           setState(() {
                             books.removeWhere(
                                 (book) => book.id == display[index].id);
-                            final booksToSave = <String>[];
-                            for (var book in books) {
-                              booksToSave.add(book.toJson());
-                            }
-                            var encoded = jsonEncode(booksToSave);
-                            File('lib/src/library.json').writeAsString(encoded);
+                            saveData();
                             Navigator.of(context).pop();
                             display.removeAt(index);
                           });

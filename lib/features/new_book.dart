@@ -52,12 +52,7 @@ class _NewBookPageState extends State<NewBookPage> {
                       phase: phasesController.text.split(','),
                     );
                     books.add(book);
-                    final booksToSave = <String>[];
-                    for (var book in books) {
-                      booksToSave.add(book.toJson());
-                    }
-                    var encoded = jsonEncode(booksToSave);
-                    File('lib/src/library.json').writeAsString(encoded);
+                    saveData();
                     Navigator.of(context).pushReplacementNamed('home');
                   }
                 },
