@@ -13,55 +13,68 @@ class Menu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: 2,
-      itemBuilder: (context, index) {
-        final children = <ListTile>[];
-        if (index == 0) {
-          for (var phase in [
-            'Postulantado I',
-            'Postulantado II',
-            'Discipulado',
-            'Consagrados'
-          ]) {
-            children.add(
-              ListTile(
-                title: Text(phase),
-                onTap: () {
-                  if (pop) {
-                    Navigator.pop(context);
-                  }
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => ListPage(phase: phase),
-                    ),
-                  );
-                },
-              ),
-            );
-          }
-          return ExpansionTile(
-              title: const Text('POR FASE'), children: children);
-        }
-        for (var cat in categories) {
-          children.add(
-            ListTile(
-              title: Text(cat),
-              onTap: () {
-                if (pop) {
-                  Navigator.pop(context);
-                }
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(
-                    builder: (context) => ListPage(category: cat),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ExpansionTile(
+            title: const Text('POR FASE'),
+            children: [
+              'Postulantado I',
+              'Postulantado II',
+              'Discipulado',
+              'Consagrados'
+            ]
+                .map(
+                  (phase) => ListTile(
+                    title: Text(phase),
+                    onTap: () {
+                      if (pop) {
+                        Navigator.pop(context);
+                      }
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => ListPage(phase: phase),
+                        ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          );
-        }
-        return ExpansionTile(title: const Text('POR TEMA'), children: children);
-      },
+                )
+                .toList(),
+          ),
+          ExpansionTile(
+            title: const Text('POR TEMA'),
+            children: categories
+                .map(
+                  (cat) => ListTile(
+                    title: Text(cat),
+                    onTap: () {
+                      if (pop) {
+                        Navigator.pop(context);
+                      }
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => ListPage(category: cat),
+                        ),
+                      );
+                    },
+                  ),
+                )
+                .toList(),
+          ),
+          pop
+              ? ListTile(
+                  leading: const Icon(Icons.home),
+                  title: const Text('INÍCIO'),
+                  onTap: () {
+                    if (pop) {
+                      Navigator.pop(context);
+                    }
+                    Navigator.of(context).pushReplacementNamed('home');
+                  },
+                )
+              : Container(),
+        ],
+      ),
     );
   }
 }
