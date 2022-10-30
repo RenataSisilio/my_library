@@ -26,9 +26,6 @@ class MyApp extends StatelessWidget {
         'list': (context) => ListPage(),
       },
       home: const HomePage(),
-      //home: const ListPage(
-      //  category: 'Vida dos Santos',
-      //),
     );
   }
 }
