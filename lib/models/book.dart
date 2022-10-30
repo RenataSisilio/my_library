@@ -57,4 +57,8 @@ class Book {
 
   factory Book.fromJson(String source) =>
       Book.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  void delete() {
+    books.removeWhere((book) => book.id == id);
+  }
 }

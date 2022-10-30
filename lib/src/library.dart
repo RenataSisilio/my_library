@@ -8,6 +8,8 @@ final books = <Book>[];
 final categories = <String>[];
 
 void initData() {
+  books.clear();
+  categories.clear();
   final json = jsonDecode(File('lib/src/library.json').readAsStringSync());
   for (var e in json) {
     books.add(Book.fromJson(e));

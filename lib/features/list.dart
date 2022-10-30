@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:leitura_espiritual/features/edit_book.dart';
 
@@ -42,20 +45,59 @@ class _HomePageState extends State<ListPage> {
         body: ListView.separated(
           separatorBuilder: (context, index) => const Divider(),
           itemCount: display.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(display[index].title),
-            subtitle: Text(display[index].author),
-            trailing: IconButton(
-              icon: const Icon(Icons.edit),
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) {
-                      return EditBookPage(display[index].id);
-                    },
+          itemBuilder: (context, index) => Dismissible(
+            key: UniqueKey(),
+            onDismissed: (direction) {
+              setState(() {
+                showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                    title: Text(
+                        'Tem certeza que deseja excluir o livro "${display[index].title}"?'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => setState(() {
+                          Navigator.of(context).pop();
+                        }),
+                        child: const Text('CANCELAR'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            books.removeWhere(
+                                (book) => book.id == display[index].id);
+                            final booksToSave = <String>[];
+                            for (var book in books) {
+                              booksToSave.add(book.toJson());
+                            }
+                            var encoded = jsonEncode(booksToSave);
+                            File('lib/src/library.json').writeAsString(encoded);
+                            Navigator.of(context).pop();
+                            display.removeAt(index);
+                          });
+                        },
+                        child: const Text('EXCLUIR'),
+                      ),
+                    ],
                   ),
                 );
-              },
+              });
+            },
+            child: ListTile(
+              title: Text(display[index].title),
+              subtitle: Text(display[index].author),
+              trailing: IconButton(
+                icon: const Icon(Icons.edit),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return EditBookPage(display[index].id);
+                      },
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ),
