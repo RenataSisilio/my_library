@@ -10,7 +10,7 @@ class Book {
     required List<String> categories,
     phase = const <String>[],
   }) {
-    this.id = id ?? books.length;
+    this.id = id ?? books[books.length - 1].id + 1;
     _categories.addAll(categories);
     _phases.addAll(phase);
   }

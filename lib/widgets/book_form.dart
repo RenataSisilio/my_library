@@ -37,14 +37,25 @@ class BookForm extends StatelessWidget {
             decoration: const InputDecoration(
               label: Text('Categorias'),
             ),
-            validator: (value) =>
-                (value == null || value.isEmpty) ? 'Campo obrigatório' : null,
           ),
-          TextFormField(
-            controller: phasesController,
+          DropdownButtonFormField(
             decoration: const InputDecoration(
               label: Text('Fase(s) Formativa(s)'),
             ),
+            items: [
+              '',
+              'Postulantado I',
+              'Postulantado II',
+              'Discipulado I',
+              'Discipulado II',
+              'Consagrados'
+            ]
+                .map((e) => DropdownMenuItem(
+                      value: e,
+                      child: Text(e),
+                    ))
+                .toList(),
+            onChanged: (value) => phasesController.text = value ?? '',
           ),
         ],
       ),

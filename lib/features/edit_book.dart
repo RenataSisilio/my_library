@@ -5,7 +5,8 @@ import '../src/library.dart';
 import '../widgets/book_form.dart';
 
 class EditBookPage extends StatefulWidget {
-  EditBookPage(int index, {super.key}) : book = books[index];
+  EditBookPage(int index, {super.key})
+      : book = books.firstWhere((book) => book.id == index);
 
   final formKey = GlobalKey<FormState>();
   final Book book;
@@ -58,7 +59,8 @@ class _EditBookPageState extends State<EditBookPage> {
                       categories: catController.text.split(','),
                       phase: phasesController.text.split(','),
                     );
-                    books[book.id] = book;
+                    initData();
+                    books[books.indexWhere((element) => element.id == book.id)] = book;
                     saveData();
                     Navigator.of(context).pushReplacementNamed('home');
                   }

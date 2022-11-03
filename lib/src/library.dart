@@ -21,6 +21,7 @@ void initData() {
       }
     }
   }
+  categories.sort((a, b) => a.compareTo(b));
 }
 
 void saveData() {

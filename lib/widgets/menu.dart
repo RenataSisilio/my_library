@@ -21,7 +21,8 @@ class Menu extends StatelessWidget {
             children: [
               'Postulantado I',
               'Postulantado II',
-              'Discipulado',
+              'Discipulado I',
+              'Discipulado II',
               'Consagrados'
             ]
                 .map(
@@ -44,6 +45,7 @@ class Menu extends StatelessWidget {
           ExpansionTile(
             title: const Text('POR TEMA'),
             children: categories
+                .where((cat) => cat != '')
                 .map(
                   (cat) => ListTile(
                     title: Text(cat),
