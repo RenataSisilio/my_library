@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:leitura_espiritual/features/edit_book.dart';
 
 import '../models/book.dart';
-import '../src/library.dart';
+import '../src/local.dart';
 import '../widgets/menu.dart';
 
 class ListPage extends StatefulWidget {

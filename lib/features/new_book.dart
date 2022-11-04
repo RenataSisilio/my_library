@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/book.dart';
-import '../src/library.dart';
+import '../src/local.dart';
 import '../widgets/book_form.dart';
 
 class NewBookPage extends StatefulWidget {

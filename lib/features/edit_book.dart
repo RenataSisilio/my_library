@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../models/book.dart';
-import '../src/library.dart';
+import '../src/local.dart';
 import '../widgets/book_form.dart';
 
 class EditBookPage extends StatefulWidget {
@@ -60,7 +60,8 @@ class _EditBookPageState extends State<EditBookPage> {
                       phase: phasesController.text.split(','),
                     );
                     initData();
-                    books[books.indexWhere((element) => element.id == book.id)] = book;
+                    books[books
+                        .indexWhere((element) => element.id == book.id)] = book;
                     saveData();
                     Navigator.of(context).pushReplacementNamed('home');
                   }

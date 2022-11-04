@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import '../src/library.dart';
+import '../src/local.dart';
 
 class Book {
   Book({
