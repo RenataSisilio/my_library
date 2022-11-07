@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
+
+import 'package:leitura_espiritual/src/file_storage.dart';
 
 import '../models/book.dart';
 
@@ -7,10 +8,10 @@ final books = <Book>[];
 
 final categories = <String>[];
 
-void initData() {
+Future<void> initData() async {
   books.clear();
   categories.clear();
-  final json = jsonDecode(File('lib/src/library.json').readAsStringSync());
+  final json = jsonDecode(await FileStorage().readLibrary());
   for (var e in json) {
     books.add(Book.fromJson(e));
   }
@@ -24,11 +25,11 @@ void initData() {
   categories.sort((a, b) => a.compareTo(b));
 }
 
-void saveData() {
+Future<void> saveData() async {
   final booksToSave = <String>[];
   for (var book in books) {
     booksToSave.add(book.toJson());
   }
   var encoded = jsonEncode(booksToSave);
-  File('lib/src/library.json').writeAsString(encoded);
+  await FileStorage().writeLibrary(encoded);
 }

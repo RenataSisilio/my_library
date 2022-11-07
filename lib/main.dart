@@ -5,8 +5,8 @@ import 'features/list.dart';
 import 'features/new_book.dart';
 import 'src/library.dart';
 
-void main() {
-  initData();
+void main() async {
+  await initData();
   runApp(const MyApp());
 }
 
